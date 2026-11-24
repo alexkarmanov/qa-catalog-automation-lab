@@ -10,4 +10,4 @@
 
 **Engineering ideas that carried the project.** Independent expected values, "no change" proofs for rejected requests, per-test isolation, bounded waits, evidence checks that fail closed, and a seeded-defect check that proves the tests detect defects.
 
-**Honest limits.** One verified environment (macOS, Python 3.12), Playwright Firefox could not be run on the development machine, hosted CI has not run, and the target's security policy is deliberately simplified and synthetic. It is a personal portfolio project, not commercial experience; see `LIMITATIONS.md`.
+**Hosted verification and scope.** The full suite subsequently passed on Ubuntu 24.04 with Python 3.11, 3.12 and 3.13. Playwright scenarios passed on Chromium, Firefox and WebKit. The catalog and its simplified access policy are synthetic. See [the hosted CI run](https://github.com/alexkarmanov/qa-catalog-automation-lab/actions/runs/45311088885) and [project limitations](LIMITATIONS.md).
