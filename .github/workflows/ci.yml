@@ -27,7 +27,7 @@ env:
 jobs:
   lint-types:
     name: lint and types (Python 3.12)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
 
   tests:
     name: tests (Python ${{ matrix.python }}, Chromium + Selenium Chrome)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -88,7 +88,7 @@ jobs:
 
   browsers:
     name: same business scenarios on ${{ matrix.browser }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -126,7 +126,7 @@ jobs:
     name: required checks gate
     needs: [lint-types, tests, browsers]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - name: Fail unless every required job succeeded
