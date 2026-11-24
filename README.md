@@ -10,7 +10,7 @@ A personal QA automation project, originally developed in 2023 and modernized in
 |---|---|---|
 | **2023 - original project** | an API client, a SQLite helper, a Selenium page object and 22 tests | weaknesses found on review in 2026: results depended on the live internet; a rejected login "proved" by the page title; tests mutated one shared database; hard-coded paths; SQL built with string interpolation; tests that print but cannot fail |
 | **2026 - modernization** | a local sandbox target, a test plan and contract written *before* any test code, independent oracles, six test layers, mutation checks, real reports | listed with fixes in [docs/DEVELOPMENT_DEFECTS.md](docs/DEVELOPMENT_DEFECTS.md), including defects found by an external review |
-| **Publication candidate (1.0.2)** | this clean snapshot: reproducible installation, evidence sample, CI workflow (not yet run hosted) | see [docs/LIMITATIONS.md](docs/LIMITATIONS.md) |
+| **Publication candidate (1.0.2)** | this clean snapshot: reproducible installation, evidence sample, CI verified on Ubuntu 24.04 | see [docs/LIMITATIONS.md](docs/LIMITATIONS.md) |
 
 The story is in [docs/CASE_STUDY.md](docs/CASE_STUDY.md); who did what, including AI involvement, is in [docs/DEVELOPMENT_HISTORY.md](docs/DEVELOPMENT_HISTORY.md).
 
@@ -56,7 +56,7 @@ Text version: tests -> (browser | HTTP | adapter) -> Flask sandbox -> SQLite; an
 | `e2e` | 4 | complete flows with three independent observations (browser, API, SQL) | Playwright + requests + SQL |
 | `framework` | 179 | tests of the test infrastructure itself: isolation and teardown, evidence and report integrity, packaging, CI configuration | pytest |
 
-Also: Flask (target), SQLite, ruff, mypy, pytest-html, Allure, pytest-xdist, coverage, GitHub Actions (configured). All dependencies are free and locked with hashes (`requirements.lock.txt`).
+Also: Flask (target), SQLite, ruff, mypy, pytest-html, Allure, pytest-xdist, coverage, GitHub Actions. All dependencies are free and locked with hashes (`requirements.lock.txt`).
 
 ## Demonstration
 
@@ -90,7 +90,7 @@ All numbers come from real runs recorded in [docs/QA_REPORT.md](docs/QA_REPORT.m
 | Lint and types | `ruff` and `mypy` clean | same |
 | Allure and HTML reports | rendered from the real run | [docs/evidence](docs/evidence) |
 
-Not verified: Playwright **Firefox** (it does not start on the development machine), Linux, Windows, Python 3.11/3.13, and **hosted CI - the workflow has never run**, so there is no CI badge.
+The table records the original macOS run. Firefox did not start in that environment and Windows was not tested. The hosted results below cover Linux, Firefox, and Python 3.11–3.13.
 
 ## Quick start
 
@@ -154,7 +154,7 @@ def test_readonly_connection_refuses_writes(db_path, observer):
 
 ## CI
 
-[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint/types, the suite on Python 3.11-3.13, and the same browser scenarios on Chromium, Firefox and WebKit; a final gate job fails the workflow if any job failed, and JUnit, HTML, Allure results, screenshots and traces are kept even on failure. **It has been validated against the workflow schema but never executed on a hosted runner.** First-run instructions: [docs/CI_FIRST_HOSTED_RUN.md](docs/CI_FIRST_HOSTED_RUN.md).
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint/types, the suite on Python 3.11-3.13, and the same browser scenarios on Chromium, Firefox and WebKit; a final gate job fails the workflow if any job failed, and JUnit, HTML, Allure results, screenshots and traces are kept even on failure. The [successful hosted run](https://github.com/alexkarmanov/qa-catalog-automation-lab/actions/runs/45311088885) on November 23, 2026 verified commit `ff4c656` on Ubuntu 24.04. All eight jobs passed, including the three Python versions, the three browser engines and the final gate. Six report bundles are available to repository readers for three days. The [first-run notes](docs/CI_FIRST_HOSTED_RUN.md) record the pre-CI plan.
 
 ## Documents
 
