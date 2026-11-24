@@ -1,10 +1,8 @@
-# First hosted CI run - instructions (nothing has been run hosted)
+# First hosted CI run
 
-**Status: the workflow `.github/workflows/ci.yml` has never been executed on GitHub Actions.** Nothing may be described as "CI passing" and no badge
-may be added before a real run has passed. Running it needs an explicit decision by the repository owner, because it means pushing the repository (or
-the publication candidate) to a GitHub repository.
+The first hosted run failed during Playwright browser installation on Ubuntu 26.04. After pinning Ubuntu 24.04, [the second run](https://github.com/alexkarmanov/qa-catalog-automation-lab/actions/runs/45311088885) passed all eight jobs on November 23, 2026. The notes below preserve the original verification and first-run plan.
 
-## What was verified locally instead
+## What was verified locally before CI
 
 | Check | Result |
 |---|---|
