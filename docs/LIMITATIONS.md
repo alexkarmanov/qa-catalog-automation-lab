@@ -7,9 +7,9 @@
 | macOS (Apple Silicon), Python **3.12** (isolated, hash-locked dependencies) | **verified**: complete suite, lint, type checks, all 26 seeded defects, scripted UAT, clean installation of the final archive |
 | Playwright **Chromium** and **WebKit**, Selenium **Chrome** | **verified** (versions and counts in `QA_REPORT.md`) |
 | Python 3.9 (macOS) | the suite was run once more as a regression check (tests only; the project's declared floor is now 3.11) |
-| Playwright **Firefox** | **not run**: the Firefox build bundled with Playwright 1.60 does not finish starting on the development machine (macOS 27.2.1; its own graphics initialisation fails, with or without Playwright and with sandbox or graphics preferences changed). It is in the CI workflow and untested until a Linux runner executes it |
-| Linux, Windows, Python 3.11 and 3.13, headed mode, other screen sizes | **not verified** |
-| Hosted CI (GitHub Actions) | **never run**; the workflow was only validated against the workflow schema and its commands were run by hand |
+| Playwright **Firefox** | **verified in Linux CI**. The bundled build did not start on the development Mac. |
+| Windows, headed mode, other screen sizes | Outside the verified scope |
+| Hosted CI (GitHub Actions) | [Passed on Ubuntu 24.04](https://github.com/alexkarmanov/qa-catalog-automation-lab/actions/runs/45311088885). Full suite on Python 3.11–3.13, plus Chromium, Firefox and WebKit scenario jobs. |
 | Safari | not tested; the Playwright "WebKit" engine is not Safari |
 
 "Verified" means the commands were executed and the results are recorded in `QA_REPORT.md`, `MUTATION_REPORT.md` and `UAT_RESULT.md`. "Not verified" is not a claim that it fails.
@@ -36,4 +36,4 @@
 * No licence has been chosen; the repository name is not trademark-cleared (GitHub and PyPI were checked on 2026-11-18, no trademark search).
 
 ## Not claimed
-Commercial employment experience, production deployment, mastery of any tool by the author before it has been used on real tasks, compliance of any kind, client experience, cross-browser or cross-platform support beyond the table above, or a hosted CI pass.
+Commercial employment experience, production deployment, mastery of any tool by the author before it has been used on real tasks, compliance of any kind, client experience, cross-browser or cross-platform support beyond the table above.
