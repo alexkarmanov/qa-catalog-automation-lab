@@ -1,0 +1,3 @@
+# Representative failure artifact
+
+`exercise_E06_broken_locator.png` is the real screenshot written by the failure hook in `conftest.py` when exercise E06 was executed once (the `data-sku` selector in `CatalogPage.row` was changed to `data-id` in the working tree, the test failed with `AssertionError: Locator expected to have text 'Synthetic Widget'` after the 5 s bounded wait, and the file was then restored from Git). The page shows the table is rendered; only the locator was wrong. No credentials appear (the password field is empty in screenshots; no trace was stored). Failure messages of the 13 seeded defects are in `docs/MUTATION_REPORT.md`.

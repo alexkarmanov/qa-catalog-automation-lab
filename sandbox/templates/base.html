@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}CAPS sandbox{% endblock %}</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:2rem;max-width:56rem}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid #bbb;padding:.35rem .6rem;text-align:left}
+.flash{background:#e6f4ea;border:1px solid #6aa84f;padding:.5rem;margin:.75rem 0}
+.error{background:#fdecea;border:1px solid #d93025;padding:.5rem;margin:.75rem 0}
+.banner{background:#fff4ce;padding:.4rem;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="banner">Synthetic local sandbox. Test-only data. Not a product.</div>
+<header>
+{% if user %}
+<span data-testid="current-user">{{ user["username"] }} ({{ user["role"] }})</span>
+<a href="/catalog">Catalog</a>
+<form method="post" action="/logout" style="display:inline"><button type="submit" data-testid="logout">Sign out</button></form>
+{% endif %}
+</header>
+{% if flash %}<div class="flash" data-testid="flash">{{ flash }}</div>{% endif %}
+{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,134 @@
+# CI configuration for karmanovqaauto 1.0.2.
+#
+# STATUS: this workflow has NEVER been executed on a hosted runner. It was validated locally (JSON-schema check of
+# the workflow syntax) and every command below was run by hand on macOS/Python 3.12; Linux and Python 3.11/3.13 are
+# unverified until the first hosted run (see docs/CI_FIRST_HOSTED_RUN.md). No badge is published before a real pass.
+#
+# Failure propagation: every job step runs a command whose non-zero exit fails the step and the job; the final
+# `ci-gate` job fails the workflow if ANY required job failed or was cancelled. No step uses `continue-on-error`.
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.pw-browsers
+
+jobs:
+  lint-types:
+    name: lint and types (Python 3.12)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+      - name: Install locked dependencies (hash-checked)
+        run: python -m pip install --require-hashes -r requirements.lock.txt
+      - name: Lint (ruff)
+        run: python -m ruff check .
+      - name: Static types (mypy)
+        run: python -m mypy
+
+  tests:
+    name: tests (Python ${{ matrix.python }}, Chromium + Selenium Chrome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.12 is the version verified by the project (macOS). 3.11 and 3.13 are supported by declaration only
+        # until their first hosted run: a failure there fails the workflow, which is the honest outcome.
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+      - name: Install locked dependencies (hash-checked)
+        run: python -m pip install --require-hashes -r requirements.lock.txt
+      - name: Install Chromium for Playwright (with OS dependencies)
+        run: python -m playwright install --with-deps chromium
+      - name: Install Chrome for Selenium (Selenium Manager resolves the driver)
+        uses: browser-actions/setup-chrome@v1
+      - name: Complete suite (JUnit, HTML, Allure results, Playwright traces on failure)
+        run: >
+          python -m pytest -p no:cacheprovider
+          --junitxml=artifacts/junit-py${{ matrix.python }}.xml
+          --html=artifacts/report-py${{ matrix.python }}.html --self-contained-html
+          --alluredir=artifacts/allure-results-py${{ matrix.python }}
+          --tracing retain-on-failure --screenshot only-on-failure --output artifacts/playwright-output
+      - name: Keep reports and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-py${{ matrix.python }}
+          path: artifacts/
+          if-no-files-found: warn
+
+  browsers:
+    name: same business scenarios on ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+      - name: Install locked dependencies (hash-checked)
+        run: python -m pip install --require-hashes -r requirements.lock.txt
+      - name: Install ${{ matrix.browser }} for Playwright (with OS dependencies)
+        run: python -m playwright install --with-deps ${{ matrix.browser }}
+      - name: tests/ui_playwright and tests/e2e on ${{ matrix.browser }}
+        run: >
+          python -m pytest -p no:cacheprovider tests/ui_playwright tests/e2e --browser ${{ matrix.browser }}
+          --junitxml=artifacts/junit-${{ matrix.browser }}.xml
+          --html=artifacts/report-${{ matrix.browser }}.html --self-contained-html
+          --tracing retain-on-failure --screenshot only-on-failure --output artifacts/playwright-output-${{ matrix.browser }}
+      - name: Keep reports and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ matrix.browser }}
+          path: artifacts/
+          if-no-files-found: warn
+
+  ci-gate:
+    name: required checks gate
+    needs: [lint-types, tests, browsers]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fail unless every required job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "job results: $RESULTS"
+          for r in $RESULTS; do
+            if [ "$r" != "success" ]; then
+              echo "a required job finished with '$r'" >&2
+              exit 1
+            fi
+          done

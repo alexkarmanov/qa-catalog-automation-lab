@@ -1,0 +1,6 @@
+Python 3.9 regression run (recorded by hand from the run itself; tests only, no mypy, no mutation)
+date: 2026-11-18
+interpreter: system Python 3.9.6 (macOS), the virtual environment of the v1.0 / v1.0.1 releases (requirements.lock.py39.txt)
+command: python -m pytest -q -p no:cacheprovider -W ignore
+result line: 520 passed in 29.24s
+note: the project's declared floor is Python 3.11 since v1.0.2; this run only shows that the suite still passes on the older interpreter.

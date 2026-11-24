@@ -1,0 +1,33 @@
+[project]
+name = "karmanovqaauto"
+version = "1.0.2"
+description = "Reproducible UI, API & Database Test Automation"
+readme = "README.md"
+requires-python = ">=3.11"
+# No `license` field on purpose: the licence of this repository is an open owner decision (docs/SOURCES_AND_RIGHTS.md).
+# The name is kept as the established repository name; it is not registered as a package or trademark.
+
+[tool.ruff]
+line-length = 130
+target-version = "py311"
+extend-exclude = [".venv", ".venv312", ".pw-browsers", "artifacts", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["B011"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B017", "E501"]
+"tools/**" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores = false
+check_untyped_defs = true
+files = ["sandbox", "modules", "tools"]
+
+[tool.coverage.run]
+branch = true
+source = ["sandbox", "modules", "tests/support"]
+omit = ["sandbox/__main__.py"]

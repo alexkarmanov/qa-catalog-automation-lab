@@ -1,0 +1,66 @@
+{
+  "mutant": "M13",
+  "defect": "UI shows a stale state after publish",
+  "description": "The item detail page always renders the state DRAFT although API and database say PUBLISHED.",
+  "run_seconds": 31.6,
+  "exit_code": 1,
+  "failed_tests": 4,
+  "total_tests": 35,
+  "failures": [
+    {
+      "test": "tests/ui_playwright/test_catalog_ui::test_g07_publisher_publishes_and_a_fresh_viewer_session_sees_it[chromium]",
+      "kind": "assertion",
+      "message": "AssertionError: Locator expected to have text 'PUBLISHED'"
+    },
+    {
+      "test": "tests/ui_playwright/test_catalog_ui::test_g11_a_published_item_shows_a_lock_note_and_cannot_be_edited[chromium-editor1]",
+      "kind": "assertion",
+      "message": "AssertionError: Locator expected to have text 'PUBLISHED'"
+    },
+    {
+      "test": "tests/e2e/test_cross_layer::test_e2e_publish_is_visible_to_a_fresh_viewer_in_ui_api_and_db[chromium]",
+      "kind": "assertion",
+      "message": "AssertionError: Locator expected to have text 'PUBLISHED'"
+    },
+    {
+      "test": "tests/ui_playwright/test_catalog_ui::test_g11_a_published_item_shows_a_lock_note_and_cannot_be_edited[chromium-publisher1]",
+      "kind": "assertion",
+      "message": "AssertionError: Locator expected to have text 'PUBLISHED'"
+    }
+  ],
+  "files": [
+    "failure_screenshot_01.png",
+    "failure_screenshot_02.png",
+    "failure_screenshot_03.png",
+    "failure_screenshot_04.png",
+    "junit_failing_run.xml",
+    "playwright_trace_01.zip",
+    "playwright_trace_02.zip"
+  ],
+  "file_sources": [
+    {
+      "file": "failure_screenshot_01.png",
+      "source": "st_cross_layer.py_test_e2e_publish_is_visible_to_a_fresh_viewer_in_ui_api_and_db_chromium_"
+    },
+    {
+      "file": "failure_screenshot_02.png",
+      "source": "st_catalog_ui.py_test_g07_publisher_publishes_and_a_fresh_viewer_session_sees_it_chromium_"
+    },
+    {
+      "file": "failure_screenshot_03.png",
+      "source": "g_ui.py_test_g11_a_published_item_shows_a_lock_note_and_cannot_be_edited_chromium-editor1_"
+    },
+    {
+      "file": "failure_screenshot_04.png",
+      "source": "i.py_test_g11_a_published_item_shows_a_lock_note_and_cannot_be_edited_chromium-publisher1_"
+    },
+    {
+      "file": "playwright_trace_01.zip",
+      "source": "est-cross-layer-py-test-e2e-publish-is-visible-to-a-fresh-viewer-in-ui-api-and-db-chromium"
+    },
+    {
+      "file": "playwright_trace_02.zip",
+      "source": "est-catalog-ui-py-test-g07-publisher-publishes-and-a-fresh-viewer-session-sees-it-chromium"
+    }
+  ]
+}

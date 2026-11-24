@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Catalog - CAPS sandbox{% endblock %}
+{% block content %}
+<h1>Catalog</h1>
+{% if can_create %}<p><a href="/items/new" data-testid="new-item-link">New item</a></p>{% endif %}
+<table data-testid="catalog-table">
+<thead><tr><th>SKU</th><th>Name</th><th>Quantity</th><th>State</th></tr></thead>
+<tbody>
+{% for it in items %}
+<tr data-sku="{{ it.sku }}"><td class="col-sku"><a href="/items/{{ it.sku }}">{{ it.sku }}</a></td><td class="col-name">{{ it.name }}</td><td class="col-quantity">{{ it.quantity }}</td><td class="col-state">{{ it.state }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

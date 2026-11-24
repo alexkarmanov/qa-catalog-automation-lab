@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ item.sku }} - CAPS sandbox{% endblock %}
+{% block content %}
+<h1 data-testid="item-sku">{{ item.sku }}</h1>
+<dl>
+<dt>Name</dt><dd data-testid="item-name">{{ item.name }}</dd>
+<dt>Description</dt><dd data-testid="item-description">{{ item.description }}</dd>
+<dt>Quantity</dt><dd data-testid="item-quantity">{{ item.quantity }}</dd>
+<dt>State</dt><dd data-testid="item-state">{{ item.state }}</dd>
+</dl>
+{% if errors %}<div class="error" role="alert"><ul data-testid="form-error">{% for line in errors %}<li>{{ line }}</li>{% endfor %}</ul></div>{% endif %}
+{% if can_edit %}
+<form method="post" action="/items/{{ item.sku }}/edit" data-testid="edit-form">
+<p><label>Name <input id="edit-name" name="name" value="{{ item.name }}"></label></p>
+<p><label>Description <input id="edit-description" name="description" value="{{ item.description }}"></label></p>
+<p><label>Quantity <input id="edit-quantity" name="quantity" value="{{ item.quantity }}"></label></p>
+<p><button type="submit" data-testid="edit-submit">Save changes</button></p>
+</form>
+{% endif %}
+{% if can_publish %}
+<form method="post" action="/items/{{ item.sku }}/publish"><button type="submit" data-testid="publish-button">Publish</button></form>
+{% endif %}
+{% if item.state == "PUBLISHED" %}<p data-testid="published-lock-note">Published items cannot be modified (v1 policy).</p>{% endif %}
+{% endblock %}

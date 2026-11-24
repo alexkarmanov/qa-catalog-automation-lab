@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}New item - CAPS sandbox{% endblock %}
+{% block content %}
+<h1>New item</h1>
+{% if errors %}<div class="error" role="alert"><ul data-testid="form-error">{% for line in errors %}<li>{{ line }}</li>{% endfor %}</ul></div>{% endif %}
+<form method="post" action="/items/new" data-testid="new-item-form">
+<p><label>SKU <input id="sku" name="sku" value="{{ values.get('sku', '') }}"></label></p>
+<p><label>Name <input id="name" name="name" value="{{ values.get('name', '') }}"></label></p>
+<p><label>Description <input id="description" name="description" value="{{ values.get('description', '') }}"></label></p>
+<p><label>Quantity <input id="quantity" name="quantity" value="{{ values.get('quantity', '') }}"></label></p>
+<p><button type="submit" data-testid="item-submit">Create draft</button></p>
+</form>
+{% endblock %}

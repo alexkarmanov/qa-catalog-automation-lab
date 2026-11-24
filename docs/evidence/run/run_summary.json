@@ -1,0 +1,251 @@
+{
+  "steps": {
+    "collect_only": {
+      "command": "python -m pytest --collect-only -q -p no:cacheprovider -W ignore",
+      "exit_code": 0,
+      "seconds": 0.9,
+      "stdout_tail": "in_ui.py::test_g01_invalid_login_shows_an_error_and_creates_no_session[chromium-unknown-user]\ntests/ui_playwright/test_login_ui.py::test_g02_each_role_can_sign_in_and_sees_its_identity[chromium-publisher1]\ntests/ui_playwright/test_catalog_ui.py::test_g09_invalid_form_input_shows_the_problem_and_writes_nothing[chromium-text]\ntests/ui_playwright/test_login_ui.py::test_g01_invalid_login_shows_an_error_and_creates_no_session[chromium-empty-form]\ntests/ui_playwright/test_login_ui.py::test_g02_each_role_can_sign_in_and_sees_its_identity[chromium-viewer1]\ntests/ui_playwright/test_catalog_ui.py::test_g09_invalid_form_input_shows_the_problem_and_writes_nothing[chromium-decimal]\ntests/ui_playwright/test_login_ui.py::test_g01_invalid_login_shows_an_error_and_creates_no_session[chromium-empty-password]\ntests/ui_playwright/test_login_ui.py::test_g02_each_role_can_sign_in_and_sees_its_identity[chromium-viewer2]\ntests/ui_playwright/test_catalog_ui.py::test_g09_invalid_form_input_shows_the_problem_and_writes_nothing[chromium-missing]\ntests/ui_playwright/test_catalog_ui.py::test_g09_invalid_form_input_shows_the_problem_and_writes_nothing[chromium-blank-name]\ntests/ui_playwright/test_catalog_ui.py::test_g09_invalid_form_input_shows_the_problem_and_writes_nothing[chromium-bad-sku]\ntests/ui_selenium/test_selenium_smoke.py::test_g01_invalid_login_is_rejected\ntests/ui_selenium/test_selenium_smoke.py::test_g02_viewer_sees_only_published_items_and_logout_revokes_access\n\n520 tests collected in 0.26s\n",
+      "stderr_tail": "",
+      "ok": true,
+      "mandatory": true
+    },
+    "first_run": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore --junitxml=artifacts/evidence_run/junit_first_run.xml --html=artifacts/evidence_run/report.html --self-contained-html --alluredir=artifacts/evidence_run/allure-results",
+      "exit_code": 0,
+      "seconds": 30.0,
+      "stdout_tail": "........................................................................ [ 13%]\n........................................................................ [ 27%]\n........................................................................ [ 41%]\n........................................................................ [ 55%]\n........................................................................ [ 69%]\n........................................................................ [ 83%]\n........................................................................ [ 96%]\n................                                                         [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_first_run.xml -\n- Generated html report: file://<PROJECT>/artifacts/evidence_run/report.html -\n520 passed in 29.16s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": true
+    },
+    "reverse_order": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore -p tools.order_plugin --junitxml=artifacts/evidence_run/junit_reverse.xml",
+      "exit_code": 0,
+      "seconds": 28.8,
+      "stdout_tail": "........................................................................ [ 13%]\n........................................................................ [ 27%]\n........................................................................ [ 41%]\n........................................................................ [ 55%]\n........................................................................ [ 69%]\n........................................................................ [ 83%]\n........................................................................ [ 96%]\n................                                                         [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_reverse.xml -\n520 passed in 27.97s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": true
+    },
+    "shuffled_order": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore -p tools.order_plugin --junitxml=artifacts/evidence_run/junit_shuffled.xml",
+      "exit_code": 0,
+      "seconds": 30.7,
+      "stdout_tail": "........................................................................ [ 13%]\n........................................................................ [ 27%]\n........................................................................ [ 41%]\n........................................................................ [ 55%]\n........................................................................ [ 69%]\n........................................................................ [ 83%]\n........................................................................ [ 96%]\n................                                                         [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_shuffled.xml -\n520 passed in 29.98s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": true
+    },
+    "separate_processes": {
+      "ok": true,
+      "mandatory": true,
+      "layers": {
+        "tests/framework": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 179,
+            "passed": 179,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 10.5
+        },
+        "tests/database": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 121,
+            "passed": 121,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 1.0
+        },
+        "tests/api": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 185,
+            "passed": 185,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 9.6
+        },
+        "tests/ui_selenium": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 3.4
+        },
+        "tests/ui_playwright": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 29,
+            "passed": 29,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 6.2
+        },
+        "tests/e2e": {
+          "exit_code": 0,
+          "junit": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "seconds": 2.0
+        }
+      },
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "browser_chromium": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore tests/ui_playwright tests/e2e --browser chromium --junitxml=artifacts/evidence_run/junit_browser_chromium.xml",
+      "exit_code": 0,
+      "seconds": 7.2,
+      "stdout_tail": ".................................                                        [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_browser_chromium.xml -\n33 passed in 6.57s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 33,
+        "passed": 33,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": true,
+      "browser": "chromium"
+    },
+    "browser_webkit": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore tests/ui_playwright tests/e2e --browser webkit --junitxml=artifacts/evidence_run/junit_browser_webkit.xml",
+      "exit_code": 0,
+      "seconds": 14.8,
+      "stdout_tail": ".................................                                        [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_browser_webkit.xml -\n33 passed in 14.17s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 33,
+        "passed": 33,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": true,
+      "browser": "webkit"
+    },
+    "parallel_xdist": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore -n 4 --junitxml=artifacts/evidence_run/junit_xdist.xml",
+      "exit_code": 0,
+      "seconds": 10.6,
+      "stdout_tail": "bringing up nodes...\nbringing up nodes...\n\n........................................................................ [ 13%]\n........................................................................ [ 27%]\n........................................................................ [ 41%]\n........................................................................ [ 55%]\n........................................................................ [ 69%]\n........................................................................ [ 83%]\n........................................................................ [ 96%]\n................                                                         [100%]\n- generated xml file: <PROJECT>/artifacts/evidence_run/junit_xdist.xml -\n520 passed in 9.86s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": false
+    },
+    "coverage": {
+      "command": "python -m pytest -q -p no:cacheprovider -W ignore --cov --cov-branch --cov-report=json:artifacts/evidence_run/coverage.json --cov-report=term --junitxml=artifacts/evidence_run/junit_coverage.xml",
+      "exit_code": 0,
+      "seconds": 30.4,
+      "stdout_tail": "e.py         36      1      4      1    95%\nmodules/ui/page_objects/catalog_page.py      28      2      2      0    93%\nmodules/ui/page_objects/sign_in_page.py      21      0      0      0   100%\nmodules/ui/playwright_pages/__init__.py       0      0      0      0   100%\nmodules/ui/playwright_pages/pages.py         76     11      0      0    86%\nsandbox/__init__.py                           3      0      0      0   100%\nsandbox/app.py                              359     14    140     14    94%\nsandbox/policy.py                             8      0      0      0   100%\nsandbox/seed.py                              23      1      4      1    93%\nsandbox/server.py                            72      5     12      3    90%\nsandbox/store.py                             59      0      8      0   100%\nsandbox/validation.py                        65      1     42      1    98%\ntests/support/__init__.py                     0      0      0      0   100%\ntests/support/golden.py                      24      0      0      0   100%\ntests/support/observer.py                    29      0      0      0   100%\ntests/support/plugin.py                      74      1      2      0    99%\ntests/support/pw_plugin.py                   26      2      0      0    92%\n---------------------------------------------------------------------------\nTOTAL                                      1159     39    262     22    96%\nCoverage JSON written to file artifacts/evidence_run/coverage.json\n520 passed in 29.36s\n",
+      "stderr_tail": "",
+      "junit": {
+        "tests": 520,
+        "passed": 520,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "ok": true,
+      "mandatory": false
+    }
+  },
+  "date": "2026-11-18",
+  "mandatory_failures": [],
+  "mandatory_steps": [
+    "collect_only",
+    "first_run",
+    "reverse_order",
+    "shuffled_order",
+    "separate_processes",
+    "browser_chromium",
+    "browser_webkit"
+  ],
+  "optional_steps": [
+    "parallel_xdist",
+    "coverage",
+    "browser_firefox"
+  ],
+  "versions": {
+    "python": "3.12.16",
+    "ssl": "OpenSSL 3.5.9 29 Sep 2026",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "packages": {
+      "pytest": "8.4.2",
+      "pytest-html": "4.2.0",
+      "pytest-playwright": "0.7.1",
+      "playwright": "1.60.0",
+      "selenium": "4.36.0",
+      "requests": "2.32.5",
+      "Flask": "3.1.3",
+      "Werkzeug": "3.1.9",
+      "allure-pytest": "2.16.2",
+      "pytest-xdist": "3.8.0",
+      "pytest-cov": "7.1.0",
+      "pytest-timeout": "2.4.0",
+      "ruff": "0.17.5",
+      "mypy": "1.19.1",
+      "coverage": "7.17.3"
+    },
+    "chrome_for_selenium": "Google Chrome 157.0.8103.79",
+    "playwright_chromium": "148.0.7778.96",
+    "playwright_firefox": "unavailable:  Crash Annotation GraphicsCriticalError: |[0][GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt (t=0.42235) [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt",
+    "playwright_webkit": "26.4",
+    "selenium_chrome_and_driver": "157.0.8103.79 | 157.0.8103.78"
+  },
+  "leftover_chromedriver_processes": []
+}

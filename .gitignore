@@ -1,0 +1,20 @@
+# Python / tooling caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+venv/
+# Generated run output (curated evidence is committed under docs/evidence/ explicitly)
+/artifacts/
+/dist/
+*.db
+*.sqlite
+*.sqlite3
+*.exe
+.pw-browsers/
+.venv312/
