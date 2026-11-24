@@ -127,3 +127,7 @@ All mandatory checks passed: JUnit and collect-only reconcile exactly, every tes
 * Note: optional step browser_firefox was not run.
 
 **Limits of this evidence:** the files are plain and unsigned. These checks detect missing, incomplete or inconsistent evidence and accidental errors; they do not authenticate the evidence and are not tamper-proof.
+
+## Private review follow-up
+
+The modern lock now uses pytest 9.0.3, pytest-playwright 0.8.0 and Requests 2.33.0. A fresh Python 3.12 environment installed the hash-locked set and returned 520 passed on macOS. The tables above describe the original v1.0.2 evidence and its environment. The Python 3.9 lock documents a historical regression run.

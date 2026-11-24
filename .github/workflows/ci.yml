@@ -31,6 +31,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -55,6 +57,8 @@ jobs:
         python: ["3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -80,6 +84,7 @@ jobs:
           name: reports-py${{ matrix.python }}
           path: artifacts/
           if-no-files-found: warn
+          retention-days: 3
 
   browsers:
     name: same business scenarios on ${{ matrix.browser }}
@@ -91,6 +96,8 @@ jobs:
         browser: [chromium, firefox, webkit]
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -113,6 +120,7 @@ jobs:
           name: reports-${{ matrix.browser }}
           path: artifacts/
           if-no-files-found: warn
+          retention-days: 3
 
   ci-gate:
     name: required checks gate
